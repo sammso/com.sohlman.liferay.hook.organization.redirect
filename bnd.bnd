@@ -1,0 +1,6 @@
+Bundle-Name: ${project.name}
+Bundle-Version: ${project.version}
+Bundle-SymbolicName: ${project.artifactId}
+Bundle-Name: ${project.name}
+Bundle-Description: ${project.description}
+Private-Package: com.sohlman.liferay.organization.redirect.hook
