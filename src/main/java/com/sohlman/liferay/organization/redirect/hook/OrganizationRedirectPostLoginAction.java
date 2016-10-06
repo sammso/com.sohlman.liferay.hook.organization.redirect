@@ -34,9 +34,9 @@ public class OrganizationRedirectPostLoginAction extends Action {
 	public void run(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws ActionException {
 		
-		long userId = _portal.getUserId(httpServletRequest);
-		
 		try {
+			long userId = _portal.getUserId(httpServletRequest);
+			
 			List<Organization> organizations = _organizationLocalService.getUserOrganizations(userId);
 			
 			for(Organization organization : organizations ) {
