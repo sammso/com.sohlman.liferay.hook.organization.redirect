@@ -20,8 +20,8 @@ import com.liferay.portal.kernel.struts.LastPath;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.model.Organization;
-import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 
 @Component(
@@ -34,10 +34,10 @@ public class OrganizationRedirectPostLoginAction extends Action {
 	public void run(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)
 			throws ActionException {
 		
-		long userId = PortalUtil.getUserId(httpServletRequest);
+		long userId = _portal.getUserId(httpServletRequest);
 		
 		try {
-			List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(userId);
+			List<Organization> organizations = _organizationLocalService.getUserOrganizations(userId);
 			
 			for(Organization organization : organizations ) {
 				ExpandoBridge expandoBridge = organization.getExpandoBridge();
@@ -60,6 +60,13 @@ public class OrganizationRedirectPostLoginAction extends Action {
 			_log.error(e);
 		}
 	}
+	
+	@Reference
+	private OrganizationLocalService _organizationLocalService;
+	
+	@Reference
+	private Portal _portal;
+	
 	private static Log _log = LogFactoryUtil
 			.getLog(OrganizationRedirectPostLoginAction.class);
 }
