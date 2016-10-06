@@ -1,4 +1,4 @@
-package com.sohlman.liferay.organization.redirect.hook;
+package com.sohlman.liferay.hook.organization.redirect;
 
 import java.io.Serializable;
 import java.util.List;
